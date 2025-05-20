@@ -1,0 +1,14 @@
+{% extends 'admin/base.html' %}
+
+{% block content %}
+
+<div>
+{% for category in categories %}
+    <div>
+        <b>{{ category.name }}. {{ category.name }}</b>
+        <i>{{ category.description }}</i>
+        <br>
+    </div>
+{% endfor %}
+</div>
+{% endblock content %}
