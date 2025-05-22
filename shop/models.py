@@ -32,7 +32,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True, verbose_name='Доступность')
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated = models.DateTimeField(auto_now=True, editable=False)
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, verbose_name='Категория товара')
 
     class Meta:
         ordering = ['category', 'name']
@@ -54,5 +54,4 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        pass
-        # return reverse('shop:product_detail', kwargs={'slug': self.slug})
+        return reverse('staff:product_detail', kwargs={'slug': self.slug})
