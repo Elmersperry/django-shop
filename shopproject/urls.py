@@ -6,7 +6,7 @@ from shopproject import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', include('shop.urls')),
+    path('', include('shop.urls')),
     path('staff/', include('shop.urls_staff')),
 ]
 

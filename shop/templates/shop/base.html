@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<header>
+    <div class="nav-menu">
+        <div class="menu-item"><a href="{% url 'shop:index' %}">Главная</a></div>
+        <div class="menu-item"><a href="">Корзина</a></div>
+        <div class="menu-item"><a href="">Заказы</a></div>
+        <div class="menu-item"><a href="">Личный кабинет</a></div>
+    </div>
+</header>
+<main>
+{% block content %}
+{% endblock content %}
+</main>
+<footer></footer>
+</body>
+</html>

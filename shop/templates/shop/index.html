@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'shop/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+
+<div class="categories">
+    <ul>
+        {% for category in categories %}
+        <li>
+            <a href="{% url 'shop:index_category' category.slug %}">{{ category.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="products">
+    {% for product in products %}
+    <div class="product-item">
+        <div class="product-item__name">
+            <a href="{% url 'shop:product_detail' slug=product.slug %}">{{ product.name }}</a>
+        </div>
+        <div class="product-item__price">{{ product.price }}</div>
+        <div class="product-item__image">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" width="200" height="auto">
+            {% else %}
+                <img src="{% static 'img/no_image.jpg' %}" width="200" height="auto">
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
