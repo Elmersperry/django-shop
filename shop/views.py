@@ -21,6 +21,7 @@ class CategoryCreateView(CreateView):
 
 # Класс для просмотра категорий
 class CategoryListView(ListView):
+    paginate_by = 2
     model = Category
     template_name = 'admin_pages/list_category.html'
     context_object_name = 'categories'
@@ -34,6 +35,7 @@ class ProductCreateView(CreateView):
 
 # Класс для отображения товаров
 class ProductListView(ListView):
+    paginate_by = 2
     model = Product
     template_name = 'admin_pages/list_product.html'
     context_object_name = 'products'
@@ -49,6 +51,7 @@ class ProductDetailView(DetailView):
 ###################### КЛИЕНТ ######################
 
 class ProductsByCategoryListView(ListView):
+    paginate_by = 2
     model = Product
     template_name = 'shop/index.html'
     context_object_name = 'products'

@@ -30,3 +30,15 @@ header {
 .menu-item: hover {
     background-color: #555;
 }
+
+.img-button {
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.to-selected-icon {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+}

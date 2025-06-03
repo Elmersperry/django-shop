@@ -38,6 +38,16 @@
   <div>
     Дата создания позиции - {{ product.created_at }}
   </div>
+  <div>
+        <form action="#" method="get">
+            <button type="submit">В КОРЗИНУ</button>
+        </form>
+  </div>
+  <div>
+        <form action="#" method="get">
+            <button class="img-button" type="submit"><img class="to-selected-icon" src="{% static 'img/heart.png' %}"></button>
+        </form>
+  </div>
 </div>
 
 {% endblock content %}
