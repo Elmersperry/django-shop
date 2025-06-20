@@ -1,0 +1,68 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<table class="cart-table" style="width: 80%; text-align: justify; margin: 0 auto;">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Изображение</th>
+        <th>Наименование</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Стоимость</th>
+    </tr>
+    </thead>
+
+    {% for item in cart %}
+        {% with product=item.product %}
+        <tr>
+            <input type="hidden" value="{{ product.id }}" id="product-id">
+            <td>
+                {{ forloop.counter }}
+            </td>
+            <td>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" style="width: 30px; height: 30px">
+                {% endif %}
+            </td>
+            <td>
+                {{ product.name }}
+            </td>
+            <td>
+                <span id="product-price">{{ product.price|floatformat:0 }}</span> руб.
+            </td>
+            <td>
+                <input id="product-quantity" name="prod_quantity" type="number" min="1" max="100000" value="{{ item.quantity }}">
+            </td>
+            <td>
+                <span id="item-price">{{ item.total_price|floatformat:0 }}</span> руб.
+            </td>
+            <td>
+                <a href="{% url 'remove_product' product.id %}">
+                    <img src="{% static 'img/cart/remove_img.png' %}" width="15px" height="15px">
+                </a>
+            </td>
+            <td>
+                <span class="removeFetch">***</span>
+            </td>
+        </tr>
+        {% endwith %}
+    {% endfor %}
+</table>
+
+<div style="width: 80%; text-align: justify; margin: 0 auto; padding-top: 50px">
+    <div>Товаров в корзине: <span id="cart-length">{{ cart|length }}</span></div>
+    <div>Сумма товаров в корзине: <span id="total-price-cart">{{ cart.get_total_price|floatformat:0 }}</span> руб. </div>
+    <a href="{% url 'cart:remove_cart' %}" class="btn">Очистить корзину</a>
+    <div style="padding-top: 10px">
+        {% if not request.user.id %}
+            <a href="#" class="btn-blue" id="new-order">Оформить заказ</a>
+        {% else %}
+            <a href="{% url 'new_order' %}" class="btn-blue" id="new-order-user">Оформить</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
