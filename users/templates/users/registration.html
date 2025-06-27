@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h3 class="reg-form">Регистрация пользователя</h3>
+<form class="reg-form" method="post">
+    {% csrf_token %}
+    {{ register_form }}
+    <button class="generic-button" type="submit">Зарегистрироваться</button>
+</form>
+<!--<form method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <h3>{% csrf_token %} Имя: {{ register_form.username }}</h3>-->
+<!--    <h3>{% csrf_token %} Surname: {{ register_form.first_name }}</h3>-->
+<!--    <h3>{% csrf_token %} Имя: {{ register_form.last_name }}</h3>-->
+<!--    <h3>{% csrf_token %} Email: {{ register_form.email }}</h3>-->
+<!--    <h3>{% csrf_token %} Пароль: {{ register_form.password }}</h3>-->
+<!--    <h3>{% csrf_token %} Повторите пароль: {{ register_form.username }}</h3>-->
+<!--    <button type="submit">Зарегистрироваться</button>-->
+<!--</form>-->
+
+{% endblock content %}

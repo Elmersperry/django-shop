@@ -8,18 +8,34 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+<div class="parent">
 <header>
+
+</header>
+<nav>
     <div class="nav-menu">
         <div class="menu-item"><a href="{% url 'shop:index' %}">Главная</a></div>
         <div class="menu-item"><a href="{% url 'cart:cart_detail' %}">Корзина</a></div>
         <div class="menu-item"><a href="">Заказы</a></div>
         <div class="menu-item"><a href="">Личный кабинет</a></div>
+        {% if not user.is_authenticated %}
+            <div><a class="menu-item" href="{% url 'users:login' %}">Вход</a></div>
+            <div><a class="menu-item" href="{% url 'users:register' %}">Регистрация</a></div>
+        {% else %}
+            <div><a class="menu-item" href="{% url 'users:profile' pk=user.pk %}">{{user.username}}</a></div>
+            <div><a class="menu-item" href="{% url 'users:logout' %}">Выйти</a></div>
+            <div><a class="menu-item" href="{% url 'admin:index' %}">Администрирование Django</a></div>
+        {% endif %}
     </div>
-</header>
+</nav>
 <main>
 {% block content %}
 {% endblock content %}
 </main>
-<footer></footer>
+<aside>aside</aside>
+<footer>footer</footer>
+</div>
 </body>
 </html>
+
+<!-- AUTH_USER_MODEL = 'users.CustomUser'-->

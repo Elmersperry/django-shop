@@ -1,0 +1,25 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="generic-description">
+<h3>Информация о пользователе</h3>
+<div>Логин - {{ user.username }}</div>
+<div>Имя - {{ user.first_name }}</div>
+<div>Фамилия - {{ user.last_name }}</div>
+<div>Электронная почта - {{ user.email }}</div>
+<div>Дата регистрации: {{ user.date_joined }}</div>
+<p>
+<a href="{% url 'users:update_user' %}">
+    <button class="update-profile-button" type="button">Изменить данные пользователя</button>
+</a>
+</p>
+<p>
+<a href="{% url 'users:change_password' %}">
+    <button class="generic-button"  type="button">Сменить пароль</button>
+</a>
+</p>
+</div>
+
+{% endblock content %}

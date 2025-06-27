@@ -3,8 +3,10 @@
 
 {% block content %}
 
+<div id="shop-index">
+
 <div class="categories">
-    <ul>
+    <ul class="categories-list">
         {% for category in categories %}
         <li>
             <a href="{% url 'shop:index_category' category.slug %}">{{ category.name }}</a>
@@ -40,7 +42,7 @@
         <form action="#" method="get">
             <button class="img-button" type="submit"><img class="to-selected-icon" src="{% static 'img/heart.png' %}"></button>
         </form>
-  </div>
+        </div>
     </div>
     {% endfor %}
 </div>
@@ -61,6 +63,8 @@
             <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
         {% endif %}
     </span>
+</div>
+
 </div>
 
 {% endblock content %}
