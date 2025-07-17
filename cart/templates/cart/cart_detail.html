@@ -3,6 +3,8 @@
 
 {% block content %}
 
+{% if cart|length != 0 %}
+
 <table class="cart-table" style="width: 80%; text-align: justify; margin: 0 auto;">
     <thead>
     <tr>
@@ -31,13 +33,13 @@
                 {{ product.name }}
             </td>
             <td>
-                <span id="product-price">{{ product.price|floatformat:0 }}</span> руб.
+                <span id="product_price">{{ product.price|floatformat:0 }}</span> руб.
             </td>
             <td>
-                <input id="product-quantity" name="prod_quantity" type="number" min="1" max="100000" value="{{ item.quantity }}">
+                <input id="product_quantity" name="product_quantity" type="number" min="1" max="100000" value="{{ item.quantity }}">
             </td>
             <td>
-                <span id="item-price">{{ item.total_price|floatformat:0 }}</span> руб.
+                <span id="item_price">{{ item.total_price|floatformat:0 }}</span> руб.
             </td>
             <td>
                 <a href="{% url 'remove_product' product.id %}">
@@ -64,5 +66,13 @@
         {% endif %}
     </div>
 </div>
+
+{% else %}
+
+<div>
+    <p>Корзина пуста!</p>
+</div>
+
+{% endif %}
 
 {% endblock content %}

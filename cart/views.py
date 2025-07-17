@@ -1,11 +1,14 @@
 from itertools import product
 
+import json
 from django.shortcuts import render, get_object_or_404, redirect
 from decimal import Decimal
 
+from django.http.response import HttpResponse, JsonResponse
 from shop.models import Product
 from .models import CartUser, CartItem
 from shopproject.settings import CART_SESSION_ID
+from django.views.decorators.csrf import csrf_exempt
 
 class Cart:
     """
@@ -189,3 +192,17 @@ def remove_cart(request):
     cart.clear()
     return redirect('cart_detail')
 
+@csrf_exempt
+def remove_product_ajax(request):
+    data = json.loads(request.body)
+    product_id = data.get('productIdValue')
+    product = get_object_or_404(Product, pk=product_id)
+    if request.user.id:
+        cart = ProductCartUser(request)
+        cart.remove(product_id, request)
+    else:
+        cart = Cart(request)
+        cart.remove(product)
+
+    response_data = {'result': 'success'}
+    return JsonResponse(response_data)
