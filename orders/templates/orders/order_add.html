@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Оформление заказа</title>
+{% endblock title %}
+
+{% block content %}
+<div style="text-align: center;margin-bottom: 50px;font-size:40px">
+Ваш заказ:
+</div>
+<table class="cart-table" style="width:80%; text-align:justify; margin:0 auto;">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Наименование</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Стоимость</th>
+    </tr>
+    </thead>
+    {% for item in cart %}
+            {% with product=item.product %}
+            <tr>
+                <td>
+                    {{ forloop.counter }}
+                </td>
+                <td>
+                    {{ product.name }}
+                </td>
+                <td>
+                    <span id="productPrice">{{ product.price|floatformat:0 }}</span> руб.
+                </td>
+                <td>
+                    {{ item.quantity }}
+                </td>
+                <td>
+                    <span id="itemPrice">{{ item.total_price|floatformat:0 }}</span>  руб.
+                </td>
+            </tr>
+    {% endwith %}
+    {% endfor %}
+</table>
+
+<div style="width:80%; text-align:justify; margin:0 auto; padding-top:50px">
+    <div>Товаров в заказе: <span id="cartLength">{{ cart|length }}</span></div>
+    <div>Заказ на сумму: <span id="totalPriceCart">{{ cart.get_total_price|floatformat:0 }}</span>  руб.</div>
+</div>
+
+<div style="margin-left: 185px;margin-top: 50px;">
+    <form action="{% url 'new_order' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Оформить</button>
+    </form>
+</div>
+
+{% endblock content %}

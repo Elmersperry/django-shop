@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Информация о заказе</title>
+{% endblock title %}
+
+{% block content %}
+
+<style>
+  .order-item{
+        display: flex;
+        justify-content: space-around;
+    }
+
+  .item{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+</style>
+
+<div class="order-item">
+    <div class="order-number">{{order.number}}</div>
+    <div class="order-payment">{{order.get_payment_display}}</div>
+    <div class="order-delivery">{{order.get_delivery_display}}</div>
+    <div class="order-date">{{order.created_at}}</div>
+</div>
+<hr>
+<h3>Товары в заказе:</h3>
+<br>
+{% for item in order_items %}
+    <div class="item">
+        <div>Наименование: {{ item.product.name }}</div>
+        <div>Количество: {{ item.quantity }}</div>
+    </div>
+{% endfor %}
+
+{% endblock content %}

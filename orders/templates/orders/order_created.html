@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Заказ оформлен</title>
+{% endblock title %}
+
+{% block content %}
+<h2>Заказ {{order.number}} успешно создан {{order.created_at}}</h2>
+
+{% endblock content %}
